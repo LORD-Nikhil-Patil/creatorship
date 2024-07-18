@@ -13,7 +13,7 @@ const LandingPage = () => {
         <header>
             <nav className="px-4 lg:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                    <a href="https://flowbite.com" className="flex items-center">
+                    <a href="https://" className="flex items-center">
                         <span className="pacifico-regular self-center text-3xl font-extrabold whitespace-nowrap text-dark_pink">Creatorship</span>
                     </a>
                     <div className="flex items-center lg:order-2">

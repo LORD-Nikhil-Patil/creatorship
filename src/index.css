@@ -22,3 +22,15 @@ body{
   font-weight: 400;
   font-style: normal;
 }
+
+.jodit-ui-spacer{
+  display: none;
+}
+
+.jodit-ui-group{
+  flex-wrap: nowrap !important;
+}
+
+.jodit-container:not(.jodit_inline) .jodit-wysiwyg{
+ padding: 20px !important;
+}
