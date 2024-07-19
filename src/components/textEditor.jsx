@@ -55,7 +55,7 @@ const JoditEditor = ({setEditorData}) => {
     return (
         <React.Fragment>
             <JoditReact
-                value={editorContent? editorContent: value}
+                value={editorContent}
                 config={editorConfig}
                 onChange={handleChange}
                 onBlur={handleBlur}

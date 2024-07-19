@@ -1,43 +1,47 @@
 import { memo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useRegister, usePostRegister  } from './hooks';
+import { useRegister, usePostRegister } from './hooks';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 
-interface RegisterProps{
+interface RegisterProps {
     proposal: string
 }
 
-const Register = ({proposal}:RegisterProps) => {
+const Register = ({ proposal }: RegisterProps) => {
     const navigate = useNavigate();
     let register = usePostRegister()
 
     const { formValues, handleChange } = useRegister();
-    
-    const handleSubmit = (event:React.FormEvent<HTMLFormElement>) =>{
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const params = {
             ...formValues,
             proposals: [proposal]
         }
         register.execute(params)
-
-        navigate("/profile")
     }
 
-    useEffect(()=>{
-     register.errorData && toast.error(register.errorData   , {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
+    useEffect(() => {
+
+        register.error && toast.error(register.errorData, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
         });
-    },[register.errorData])
+
+        if (!register.error && register.success) {
+            navigate("/profile");
+        }
+
+    }, [register.data, register.errorData])
 
     return (
         <section className="fixed w-full z-10 top-0 bg-gray-50 dark:bg-gray-900">
