@@ -1,12 +1,17 @@
 import axios from "../../api/index";
 import { create } from "zustand";
 
+interface response{
+  id: string
+  title: string | undefined;
+  proposal: string | undefined;
+}
 // Define the shape of our state
 interface State {
   loading: boolean;
   success: boolean;
   error: boolean;
-  data: {} | null;
+  data: response;
   errorData: string | null;
   execute: (data: any) => Promise<void>;
 }
@@ -15,7 +20,7 @@ const initialState: Omit<State, 'execute'> = {
   loading: false,
   success: false,
   error: false,
-  data: null,
+  data: {id: "", title: "", proposal:""},
   errorData: null,
 };
 

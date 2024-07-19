@@ -45,18 +45,17 @@ const JoditEditor = ({setEditorData}) => {
     };
 
     const handleChange = (value) => { 
+        setEditorData(value)
     };
 
     const handleBlur = (newContent) => {
         setEditorContent(newContent)
-        // const content = Jodit.modules.Helpers.stripTags(editorContent)
-        setEditorData(editorContent)
     };
 
     return (
         <React.Fragment>
             <JoditReact
-                value={editorContent}
+                value={editorContent? editorContent: value}
                 config={editorConfig}
                 onChange={handleChange}
                 onBlur={handleBlur}

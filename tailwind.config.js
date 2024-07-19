@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     colors: {
+      white: "#ffffff",
       white_pink: "#dbb7b2",
       dark_pink: "#c88880",
       black: "#040402"
