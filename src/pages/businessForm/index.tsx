@@ -80,7 +80,7 @@ const PostPartnership = () => {
         setEditorData(getProposal?.data?.proposal)
         setTitle(getProposal?.data?.title)
     }, [getProposal?.data])
-
+   
 return (<div className="grid grid-cols-3">
         <div className="p-14 col-span-3 sm:col-span-3 md:col-span-3 lg:col-span-2">
             <div className="top-16">

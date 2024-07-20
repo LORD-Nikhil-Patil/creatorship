@@ -62,6 +62,7 @@ export const usePostRegister = create<PostRegisterState>((set) => ({
         const response = await axios.post<{ data: any }>("auth/register", body);
         set({ ...initialState, success: true, data: response.data });
         localStorage.setItem("tokens", response.data.tokens.access.token);
+        localStorage.setItem("refreshToken", response.data.tokens.refresh.token);
         localStorage.setItem("userId", response.data.user.id);
       } catch (err: any) {
         console.error("Error in data fetch:", err);

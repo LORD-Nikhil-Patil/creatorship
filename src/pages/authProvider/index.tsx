@@ -3,26 +3,27 @@ import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 export const useLocalStorage = <T,>(keyName: string, defaultValue: T): [T, (newValue: T) => void] => {
     const [storedValue, setStoredValue] = useState<T>(() => {
-        try {
-            const value = localStorage.getItem(keyName);
-            if (value) {
-                return JSON.parse(value);
-            } else {
-                localStorage.setItem(keyName, JSON.stringify(defaultValue));
-                return defaultValue;
-            }
-        } catch (err) {
-            return defaultValue;
+      try {
+        const value = localStorage.getItem(keyName);
+        if (value) {
+          return value as T;
+        } else {
+          localStorage.setItem(keyName, JSON.stringify(defaultValue));
+          return defaultValue;
         }
+      } catch (err) {
+        console.error('Error accessing localStorage:', err);
+        return defaultValue;
+      }
     });
 
-    const setValue = (newValue: T) => {
-        try {
-            localStorage.setItem(keyName, JSON.stringify(newValue));
-        } catch (err) {
-            console.log(err);
-        }
-        setStoredValue(newValue);
+    const setValue = (newValue: T): void => {
+      try {
+        localStorage.setItem(keyName, JSON.stringify(newValue));
+      } catch (err) {
+        console.error('Error setting localStorage:', err);
+      }
+      setStoredValue(newValue);
     };
 
     return [storedValue, setValue];
@@ -30,7 +31,6 @@ export const useLocalStorage = <T,>(keyName: string, defaultValue: T): [T, (newV
 
 interface AuthContextType {
     user: any;
-    login: (data: any) => void;
     logout: () => void;
 }
 
@@ -41,13 +41,8 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useLocalStorage<any>('token', null);
+    const [user, setUser] = useLocalStorage('tokens', null);
     const navigate = useNavigate();
-
-    const login = async (data: any) => {
-        setUser(data);
-        navigate('/profile');
-    };
 
     const logout = () => {
         setUser(null);
@@ -57,7 +52,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const value = useMemo(
         () => ({
             user,
-            login,
             logout,
         }),
         [user]
