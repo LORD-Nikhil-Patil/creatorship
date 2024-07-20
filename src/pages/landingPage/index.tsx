@@ -1,6 +1,8 @@
 import creatorship from "../../assets/creatorship.mp4"
 import ReactPlayer from 'react-player/lazy'
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom";
+
 const LandingPage = () => {
   
     const navigate = useNavigate()
@@ -17,8 +19,8 @@ const LandingPage = () => {
                         <span className="pacifico-regular self-center text-3xl font-extrabold whitespace-nowrap text-dark_pink">Creatorship</span>
                     </a>
                     <div className="flex items-center lg:order-2">
-                        <a href="#" className="text-gray-800 dark:text-white font-bold rounded-lg text-lg px-5 py-2.5 mr-2">Log in</a>
-                        <a href="#" className="bg-primary-700 font-bold rounded-lg text-lg px-5 py-2.5 mr-2">Sign Up</a>
+                        <Link to="login" className="text-gray-800 dark:text-white font-bold rounded-lg text-lg px-5 py-2.5 mr-2">Log in</Link>
+                        <Link to="register"  className="bg-primary-700 font-bold rounded-lg text-lg px-5 py-2.5 mr-2">Sign Up</Link>
                         <button onClick={handlePostBusiness} className="bg-white_pink hover:bg-dark_pink text-lg font-bold py-2 px-4 border border-blue-500 rounded">
                             Post Business
                         </button>
@@ -34,9 +36,9 @@ const LandingPage = () => {
                     <button onClick={handlePostBusiness} className="bg-white_pink hover:bg-dark_pink text-lg font-bold py-2 mr-5 px-4 border border-blue-500 rounded">
                         Find Creators
                     </button>
-                    <button className="hover:bg-gray-100 hover:bg-opacity-15 text-gray-800 mr-5 text-lg font-bold py-2 px-4 border border-gray-400 rounded shadow">
+                    <Link to="register" className="hover:bg-gray-100 hover:bg-opacity-15 text-gray-800 mr-5 text-lg font-bold py-2 px-4 border border-gray-400 rounded shadow">
                         Search Businesses
-                    </button>
+                    </Link>
                 </div>
                 <div className="relative mt-5 lg:col-span-7 ">
                     <ReactPlayer url={creatorship} playing loop muted width="auto" height="auto" />
