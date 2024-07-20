@@ -14,13 +14,13 @@ const Register = ({ proposal }: RegisterProps) => {
 
     const { formValues, handleChange } = useRegister();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const params = {
             ...formValues,
             proposals: [proposal]
         }
-        register.execute(params)
+       await register.execute(params)
     }
 
     useEffect(() => {
