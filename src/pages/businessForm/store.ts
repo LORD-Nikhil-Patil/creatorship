@@ -1,5 +1,6 @@
 import axios from "../../api/index";
 import { create } from "zustand";
+import _ from "lodash";
 
 interface response{
   id: string
@@ -32,7 +33,9 @@ export const usePostProposal = create<State>((set) => ({
     try {
       const res = await axios.post("proposal", data);
       set({ ...initialState, success: true, data: res.data });
-      localStorage.setItem("userProposalId", res.data.id);
+      if(_.isEmpty(localStorage.getItem("userId"))){
+        localStorage.setItem("userProposalId", res.data.id);
+      }
 
     } catch (err: unknown) {
       let errorMessage = 'An unknown error occurred';

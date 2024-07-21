@@ -8,18 +8,7 @@ import creator from "../../assets/creator.png";
 import { usePostProposal, useGetProposal } from "./store.ts";
 import _ from 'lodash';
 import { Bounce, toast, ToastContainer } from "react-toastify";
-
-interface ShowHtmlProps {
-    htmlContent: string;
-}
-
-const ShowHtml: React.FC<ShowHtmlProps> = ({ htmlContent }) => {
-    return (
-        <div dangerouslySetInnerHTML={{ __html: htmlContent }} >
-        </div>
-    );
-}
-
+import {ShowHtml} from "../../components/renderHTML.tsx"
 
 const PostPartnership = () => {
     const postProposal = usePostProposal()
@@ -50,11 +39,13 @@ const PostPartnership = () => {
         }
 
         if (_.isEmpty(getProposal.data.proposal)) {
+            const userId = localStorage.getItem("userId");
             const coded = encodeURIComponent(editorData)
 
             let params = {
                 title: title,
-                proposal: coded
+                proposal: coded,
+                userId: userId
             }
             postProposal.execute(params)
         }
@@ -101,7 +92,7 @@ return (<div className="grid grid-cols-3">
                     </div>
 
                     <div className="relative top-5 bg-white_pink p-4 min-h-20 flex justify-center items-center font-light text-lg">
-                        <ShowHtml htmlContent={decodeURIComponent(getProposal.data.proposal)} />
+                        <ShowHtml htmlContent={decodeURIComponent(String(getProposal.data.proposal))} />
                     </div>
                 </div>}
                 <button onClick={handleProposal} className="relative top-10 bg-white_pink text-lg font-bold py-2 mr-5 px-4 border border-blue-500 rounded">
@@ -113,7 +104,7 @@ return (<div className="grid grid-cols-3">
         <div className="fixed hidden lg:block md:col-span-1 lg:col-span-1 xl:col-span-1">
             <img className="fixed right-0 h-full w-4/12 " src={creator} alt="Creator" />
         </div>
-        {openRegister && createPortal(<Register proposal={getProposal?.data?.id} />, document.body)}
+        {openRegister && createPortal(<Register />, document.body)}
     </div>)
 }
 
