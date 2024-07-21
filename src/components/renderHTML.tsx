@@ -1,10 +1,11 @@
 interface ShowHtmlProps {
     htmlContent: string;
+    className: string
 }
 
-export const ShowHtml: React.FC<ShowHtmlProps> = ({ htmlContent }) => {
+export const ShowHtml: React.FC<ShowHtmlProps> = ({ htmlContent, className="" }) => {
     return (
-        <div dangerouslySetInnerHTML={{ __html: htmlContent }} >
-        </div>
+        <p className={className} dangerouslySetInnerHTML={{ __html: htmlContent }} >
+        </p>
     );
 }

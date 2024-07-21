@@ -7,10 +7,6 @@ const LandingPage = () => {
   
     const navigate = useNavigate()
 
-    const handlePostBusiness = () => {
-        navigate("partnership")
-    }
-
     return (<>
         <header>
             <nav className="px-4 lg:px-6 py-2.5">
@@ -21,9 +17,9 @@ const LandingPage = () => {
                     <div className="flex items-center lg:order-2">
                         <Link to="login" className="text-gray-800 dark:text-white font-bold rounded-lg text-lg px-5 py-2.5 mr-2">Log in</Link>
                         <Link to="register"  className="bg-primary-700 font-bold rounded-lg text-lg px-5 py-2.5 mr-2">Sign Up</Link>
-                        <button onClick={handlePostBusiness} className="bg-white_pink hover:bg-dark_pink text-lg font-bold py-2 px-4 border border-blue-500 rounded">
+                        <Link to="partnership" className="bg-white_pink hover:bg-dark_pink text-lg font-bold py-1 px-3 border rounded">
                             Post Business
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </nav>
@@ -33,10 +29,10 @@ const LandingPage = () => {
                 <div className="place-self-center mr-auto lg:col-span-5">
                     <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">Introducing Creatorship Platform</h1>
                     <p className="mb-6 max-w-2xl text-lg font-semibold text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">The envisioned web platform that empowers creators and businesses to establish mutually beneficial partnerships through equity.</p>
-                    <button onClick={handlePostBusiness} className="bg-white_pink hover:bg-dark_pink text-lg font-bold py-2 mr-5 px-4 border border-blue-500 rounded">
+                    <Link to="partnership" className="bg-white_pink hover:bg-dark_pink text-lg font-bold py-1 mr-3 px-4 border rounded">
                         Find Creators
-                    </button>
-                    <Link to="register" className="hover:bg-gray-100 hover:bg-opacity-15 text-gray-800 mr-5 text-lg font-bold py-2 px-4 border border-gray-400 rounded shadow">
+                    </Link>
+                    <Link to="register" className="mr-5 text-lg font-bold py-1 px-3 border rounded shadow">
                         Search Businesses
                     </Link>
                 </div>

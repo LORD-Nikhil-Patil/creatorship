@@ -1,4 +1,5 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import axios from '../../api'
 import { ChangeEvent, useState } from 'react';
 import create from 'zustand';
 
@@ -7,7 +8,7 @@ interface DataState {
   success: boolean;
   error: boolean;
   data: any[] | null;
-  errorData: string | null;
+  errorData: string | null | any;
   execute: (body?: any) => Promise<void>; // Allow an optional body parameter
 }
 
@@ -23,16 +24,15 @@ export const useLogIn = create<DataState>((set, get) => ({
   ...initialState,
 
   execute: async (body?: any) => { 
-    console.log("body", body)
     set({ ...initialState, loading: true });
     try {
       const res = await axios.post('auth/login', body);
       set({ ...initialState, success: true, data: res.data });
-      localStorage.setItem("tokens", response.data.tokens.access.token);
-      localStorage.setItem("refreshToken", response.data.tokens.refresh.token);
-      localStorage.setItem("userId", response.data.user.id);
+      localStorage.setItem("tokens", res.data.tokens.access.token);
+      localStorage.setItem("refreshToken", res.data.tokens.refresh.token);
+      localStorage.setItem("userId", res.data.user.id);
     } catch (err) {
-      const error = err as AxiosError;
+      const error: any = err as AxiosError;
       console.error('Error in data fetch:', error);
       set({ ...initialState, error: true, errorData: error.response.data });
     }
