@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/partnership" element={<PostPartnership />} />
-        <Route path="/register" element={<Register proposal={""} />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={
           <ProtectedRoute>
