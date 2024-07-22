@@ -19,17 +19,11 @@ interface RequestParams {
     onFinal?: () => void;
   }
 
-interface Proposal {
-    title: string;
-    proposal: string;
-    id: string;
-  }
-  
   interface RequestState {
     loading: boolean;
     success: boolean;
     error: boolean;
-    data?: Proposal[];
+    data?: any;
     errorData?: AxiosError | null;
   }
   
@@ -37,7 +31,7 @@ interface Proposal {
     loading: false,
     success: false,
     error: false,
-    data: [],
+    data: {},
     errorData: null,
   };
   
@@ -82,3 +76,19 @@ interface Proposal {
     }));
   };
   
+
+  export const useGetProposal = request(
+    {
+      method: "POST",
+      url: '/proposal/get',
+    },
+  );
+
+
+  
+  export const usPostApplication = request(
+    {
+      method: "POST",
+      url: '/applications',
+    },
+  );
