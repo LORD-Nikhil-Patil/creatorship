@@ -37,9 +37,9 @@ import {useFormInput, useLogIn} from "./hooks"
         });
 
         if (!logIn.error && logIn.success) {
-            navigate(state?.path || "/profile");
-        }
-    },[ logIn.data])
+            navigate(state?.path || "/profile", {state: logIn.data?.user.id});
+        } 
+    },[logIn.data])
 
   return (
     <section className="fixed w-full z-10 top-0 bg-gray-50 dark:bg-gray-900">

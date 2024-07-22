@@ -4,11 +4,11 @@ import _ from 'lodash';
 import { useGetUser, useUserProposal } from "./hooks";
 
 import UserForm from "./userForm"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ShowHtml } from "../../components/renderHTML.tsx"
-
 const Profile = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
     const [editOpen, setEditOpen] = useState(false);
     const getUser: any = useGetUser();
     const updateProposal = useUserProposal();
@@ -18,14 +18,15 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        let userId = localStorage.getItem("userId");
+        let userId = _.isEmpty(location.state)? localStorage.getItem("userId"): location.state;
+        ;
         let proposalId = localStorage.getItem("userProposalId");
         let params = {
             id: userId
         }
         getUser.execute(params)
 
-        if (!_.isEmpty(userId) && !_.isEmpty(proposalId)) {
+        if (!_.isEmpty(proposalId)) {
             let data = {
                 data: { userId, proposalId }
             }

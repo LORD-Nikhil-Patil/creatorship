@@ -32,9 +32,12 @@ export const useLogIn = create<DataState>((set, get) => ({
       localStorage.setItem("refreshToken", res.data.tokens.refresh.token);
       localStorage.setItem("userId", res.data.user.id);
     } catch (err) {
-      const error: any = err as AxiosError;
-      console.error('Error in data fetch:', error);
-      set({ ...initialState, error: true, errorData: error.response.data });
+      console.log('Error in data fetch:', err);
+      set({ 
+        ...initialState, 
+        error: true, 
+        errorData: err.response.data.message || "Unknown error" 
+      });
     }
   },
 }));

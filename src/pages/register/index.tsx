@@ -37,11 +37,10 @@ const Register = () => {
         });
 
         if (!register.error && register.success) {
-            navigate("/profile");
+            navigate("/profile", {state:register.data.user.id});
         }
 
     }, [register.data, register.errorData])
-
     return (
         <section className="fixed w-full z-10 top-0 bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center bg-black bg-opacity-40 px-6 py-8 mx-auto md:h-screen lg:py-0">
